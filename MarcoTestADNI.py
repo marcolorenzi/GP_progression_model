@@ -3,7 +3,7 @@
 import numpy as np
 import sys
 sys.path.append('../')
-import MarcoModel
+import GP_progression_model
 import matplotlib.pyplot as plt
 # import MarcoDataGenerator
 import Plotter
@@ -14,7 +14,7 @@ import colorsys
 # remember to change test_synthetic/test_ADNI/test_TADPOLE in GP_progression_model
 
 ### load the biomarkers
-X,Y,RID,list_biomarker = MarcoModel.convert_csv("./table_APOEpos.csv")
+X,Y,RID,list_biomarker = GP_progression_model.convert_csv("./table_APOEpos.csv")
 
 N=int(10)   # Number of random features for kernel approximation
 nrBiomk = len(list_biomarker)
@@ -26,7 +26,7 @@ plotTrajParams['allTrajOverlap'] = False
 gpPlotter = Plotter.PlotterGP(plotTrajParams)
 outFolder = 'resfiles/marcoADNI'
 os.system('mkdir -p %s' % outFolder)
-gp  = MarcoModel.GP_progression_model(X,Y,N, outFolder, gpPlotter, list_biomarker)
+gp  = GP_progression_model.GP_progression_model(X,Y,N, outFolder, gpPlotter, list_biomarker)
 
 N_global_iterations = 100
 iterParams = 50

@@ -105,6 +105,7 @@ class PlotterJDM:
     # pl.tight_layout(pad=30)
     # fig.suptitle('cluster trajectories', fontsize=20)
 
+    # ax.legend()
     h, axisLabels = ax.get_legend_handles_labels()
     # print(h[2:4], labels[2:4])
     # legend =  pl.legend(handles=h, bbox_to_anchor=self.plotTrajParams['legendPos'], loc='upper center', ncol=plotTrajParams['legendCols'])
@@ -199,9 +200,8 @@ class PlotterGP:
 
       ax.set_ylim([min_yB[b]-deltaB[b], max_yB[b]+deltaB[b]])
 
-
       # ax.set_ylim([-0.2,1.3])
-      ax.legend(loc='upper right')
+      # ax.legend(loc='upper right')
 
     if replaceFig:
       fig.show()
