@@ -411,7 +411,7 @@ class GP_progression_model(object):
                     diag_penalty[l] = 0.9 * diag_penalty[l] + 0.1 * fun_grad_penalty[l] ** 2
                     param_penalty[l] = param_penalty[l] - learning_rate * fun_grad_penalty[l]/ np.sqrt(diag_penalty[l] + epsilon)
 
-            print i, fun_value
+            print(i, fun_value)
 
             for l in range(self.N_biom):
                 self.parameters[l] = params[l]
@@ -519,7 +519,7 @@ class GP_progression_model(object):
                 diag[l] = 0.9 * diag[l] + 0.1 * fun_grad[l] ** 2
                 params_time_shift[l] = params_time_shift[l] + np.multiply(learning_rate * fun_grad[l],
                                                                           1 / np.sqrt(diag[l] + epsilon))
-            print i, -tot_lik
+            print(i, -tot_lik)
 
         for l in range(1):
             self.params_time_shift[l] = self.params_time_shift[l] + params_time_shift[l]
@@ -542,8 +542,8 @@ class GP_progression_model(object):
     def Optimize(self, N_global_iterations = 5, iterat = [50,30], Plot = True):
         # Global optimizer (GP parameters + time shift)
         for i in range(N_global_iterations):
-            print "iteration ", i, "of ", N_global_iterations
-            print "Optimizing GP parameters"
+            print("iteration ", i, "of ", N_global_iterations)
+            print("Optimizing GP parameters")
             if i>float(N_global_iterations)-2:
                 self.Optimize_GP_parameters(Niterat = iterat[0])
             else:
@@ -555,7 +555,7 @@ class GP_progression_model(object):
             if Plot:
                 self.Plot()
             if i<(N_global_iterations -1):
-                print "Optimizing time shift"
+                print("Optimizing time shift")
                 self.Optimize_time_shift(Niterat=iterat[1])
 
     def Plot(self, list_biom = []):
@@ -706,7 +706,7 @@ class GP_progression_model(object):
                 sampling_dist[biomarker].append(np.dot(output, W))
 
         for sub in range(len(X_test[0])):
-            print "predicting sub: ", sub, "out of ", len(X_test[0])
+            print("predicting sub: ", sub, "out of ", len(X_test[0]))
             pred_sub.append([])
             expectation_sub.append([])
             for pos_index,position in enumerate(Xrange):
@@ -747,7 +747,7 @@ class GP_progression_model(object):
         scaling = self.mean_std_X[0][1] * self.max_X[0]
         for i in range(len(predictions)):
             valid_indices = np.where(np.array(predictions[i]) != 0)
-	    if len(group)>0:
+            if len(group)>0:
                 col_group_sub = cm.tab10(group[i])
                 plt.plot(Xrange[valid_indices]* scaling + self.mean_std_X[0][0], np.array(predictions[i])[valid_indices],color=col_group_sub)
             else:
@@ -865,7 +865,7 @@ def convert_csv(file, list_biomarkers):
 
     # check if group information is present
     if len(np.where('group' == table.columns)[0])>0:
-	for sub in RID:
+        for sub in RID:
             group.append(table.group[np.where(np.in1d(table.RID,sub))[0][0]])
 
     group = np.array(group)
