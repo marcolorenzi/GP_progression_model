@@ -52,6 +52,11 @@ class DataGenerator(object):
     def f(self, X, L, k):
         return [L / (1 + np.exp(-k * i)) for i in X]
 
+    def predPop(self, X, b):
+        # return self.f(X, self.param[b][0], self.param[b][1])
+        return np.array(self.model[b])[X]
+
+
     def plot(self, mode):
         datamin = 0
         datamax = 1
@@ -79,7 +84,7 @@ class DataGenerator(object):
           #  fig.savefig('/Users/mlorenzi/Desktop/ipmc/mode0.png')
         if mode == 1:
             for i in np.arange(self.Nbiom):
-                print self.shiftData[i]
+                print(self.shiftData[i])
                 plt.plot( range(len(self.model[i])),self.model[i],  color=Blues(i * 2), linewidth=3)
                 plt.annotate("biom.  " + str(i), xy = (len(self.model[i]),self.model[i][len(self.model[i])-1]), color=Blues(i * 2), textcoords='data')
                 for k in np.arange(self.Nsubs):
